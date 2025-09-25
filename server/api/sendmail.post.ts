@@ -1,4 +1,4 @@
-import { defineEventHandler, readBody } from 'h3'
+import { defineEventHandler, readBody, setResponseStatus } from 'h3'
 import sgMail from '@sendgrid/mail'
 
 // Require env: SENDGRID_API_KEY, CONTACT_TO, CONTACT_FROM
@@ -12,6 +12,7 @@ export default defineEventHandler(async (event) => {
     const from = process.env.CONTACT_FROM || process.env.MY_EMAIL
 
     if (!process.env.SENDGRID_API_KEY || !to || !from) {
+      setResponseStatus(event, 400)
       return { success: false, message: 'Missing email configuration' }
     }
 
@@ -25,9 +26,11 @@ export default defineEventHandler(async (event) => {
     }
 
     await sgMail.send(msg)
+    setResponseStatus(event, 200)
     return { success: true, message: 'Mail sent' }
   } catch (error: any) {
     console.error('MAIL ERROR:', error?.response?.body || error)
+    setResponseStatus(event, 500)
     return { success: false, message: 'Failed to send email' }
   }
 })
