@@ -1,16 +1,16 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
-import { defineNuxtConfig } from 'nuxt/config';
+// nuxt.config.ts
+import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
+  builder: 'vite', // 👈 энэ мөрийг нэм
+
   runtimeConfig: {
-    // Server-side environment variables
     smtpHost: process.env.SMTP_HOST,
     smtpPort: process.env.SMTP_PORT,
     smtpUser: process.env.SMTP_USER,
     smtpPass: process.env.SMTP_PASS,
     recipientEmail: process.env.RECIPIENT_EMAIL,
   },
-  
 
   app: {
     head: {
@@ -22,15 +22,11 @@ export default defineNuxtConfig({
       ]
     }
   },
+
   modules: ['@nuxtjs/tailwindcss'],
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
-  },
   css: ['~/assets/css/main.css'],
   ssr: false,
+
   experimental: {
     payloadExtraction: false
   },
@@ -38,32 +34,11 @@ export default defineNuxtConfig({
     strict: true
   },
   nitro: {
-    compressPublicAssets: true,
-    compatibilityDate: '2025-09-23'
+    compressPublicAssets: true
   },
   components: {
     global: true,
     dirs: ['~/components']
   },
-  devServer: {
-    host: '127.0.0.1',
-    port: 3000
-  },
-  devtools: { enabled: false },
-  vite: {
-    server: {
-      hmr: false,
-      watch: {
-        usePolling: true,
-        interval: 1000
-      }
-    }
-  }
+  devtools: { enabled: true }
 })
-
-
-
-
-
-
-

@@ -1,4 +1,3 @@
-import { defineEventHandler, readBody, setResponseStatus } from 'h3'
 import sgMail from '@sendgrid/mail'
 
 // Require env: SENDGRID_API_KEY, CONTACT_TO, CONTACT_FROM
@@ -8,17 +7,16 @@ export default defineEventHandler(async (event) => {
   try {
     const { name, email, message } = await readBody<{ name: string; email: string; message: string }>(event)
 
-    const to = process.env.CONTACT_TO || process.env.MY_EMAIL
-    const from = process.env.CONTACT_FROM || process.env.MY_EMAIL
+    const to = process.env.CONTACT_TO || process.env.SENDER_EMAI
+    const from = process.env.CONTACT_FROM || process.env.RECIPIENT_EMAIL
 
     if (!process.env.SENDGRID_API_KEY || !to || !from) {
-      setResponseStatus(event, 400)
       return { success: false, message: 'Missing email configuration' }
     }
 
     const msg = {
-      to: to,
-      from: from, // must be a verified sender in SendGrid
+      to: 'bbtrdene@yahoo.com',
+      from: 'baterdeneb186@gmail.com', // must be a verified sender in SendGrid
       replyTo: email,
       subject: `New Contact from ${name}`,
       text: message,
@@ -26,11 +24,9 @@ export default defineEventHandler(async (event) => {
     }
 
     await sgMail.send(msg)
-    setResponseStatus(event, 200)
     return { success: true, message: 'Mail sent' }
   } catch (error: any) {
     console.error('MAIL ERROR:', error?.response?.body || error)
-    setResponseStatus(event, 500)
     return { success: false, message: 'Failed to send email' }
   }
 })
