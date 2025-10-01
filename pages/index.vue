@@ -133,6 +133,23 @@
                 </a>
               </div>
             </div>
+            
+            <!-- Project 4 -->
+<div class="shadow-lg rounded-lg overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-2xl" 
+     :class="isDark ? 'bg-gray-900 text-gray-200' : 'bg-white text-gray-900'">
+  <img src="@/assets/css/projector/rickmorty.jpg" alt="Rick and Morty API thumbnail" class="w-full h-40 object-cover"/>
+  <div class="p-6 text-left">
+    <h3 class="font-bold mb-2">Rick and Morty API Testing</h3>
+    <p class="text-gray-600 dark:text-gray-300 mb-4">
+      Rick and Morty API ашиглан 20 дүр татаж үзүүлсэн туршилтын төсөл.
+    </p>
+    <a href="#projects" 
+       class="inline-flex items-center gap-3 bg-purple-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-purple-700 transition">
+      <img src="@/assets/css/projector/rickmorty.jpg" alt="Rick and Morty icon" class="w-8 h-8 rounded object-cover"/>
+      <span>Дэлгэрэнгүй</span>
+    </a>
+  </div>
+</div>
 
           </div>
         </div>
