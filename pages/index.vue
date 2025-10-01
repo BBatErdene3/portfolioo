@@ -99,7 +99,7 @@
               <img src="~/assets/css/projector/portfolio-thumb.jpg" alt="Portfolio thumbnail" class="w-full h-40 object-cover"/>
               <div class="p-6 text-left">
                 <h3 class="font-bold mb-2">Portfolio Web</h3>
-                <p class="text-gray-600 dark:text-gray-300 mb-4">Vue + TailwindCSS ашиглан бүтээж буй хувийн вебсайт.</p>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">Vue + TailwindCSS вебсайт.</p>
                 <!-- Image button -->
                 <a href="#projects" class="inline-flex items-center gap-3 bg-purple-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-purple-700 transition">
                   <img src="~/assets/css/projector/portfolio-thumb.jpg" alt="Portfolio icon" class="w-8 h-8 rounded object-cover"/>
@@ -133,11 +133,9 @@
                 </a>
               </div>
             </div>
-            
-            <!-- 4 -->
-            <RickAndMortyProject/>
 
-            
+            <!-- 4 -->
+            <RickAndMortyProject ref="rickMortyModal" :isDark="isDark" />
           </div>
         </div>
       </section>
@@ -246,6 +244,7 @@ onMounted(() => {
     })
   }
 })
+
 
 const toggleTheme = () => {
   isDark.value = !isDark.value
